@@ -5,11 +5,16 @@
     "author": "Kyle Andrews <codingwithkyle@gmail.com>",
     "license": "GPL-3",
     "main": "Tooltipper.js",
+    "files": [
+        "Tooltipper.js",
+        "Tooltipper.min.js"
+    ],
     "devDependencies": {
+        "terser": "^4.8.0",
         "typescript": "^3.9.5"
     },
     "scripts": {
-        "compile": "tsc",
-        "build": "npm run compile"
+        "cleanup": "node ./cleanup.js",
+        "build": "npm run cleanup && tsc && terser ./Tooltipper.js --compress --mangle --module --output ./Tooltipper.min.js"
     }
 }
