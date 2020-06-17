@@ -23,7 +23,7 @@ Unpack the ES Module via [Snowpack](https://www.snowpack.dev/):
 ## CDN
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.0/tooltipper.min.js">
+<script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.0/tooltipper.min.js"></script>
 ```
 
 ## Usage
@@ -55,16 +55,17 @@ tool-tip {
     white-space: nowrap;
     padding: 0 0.5rem;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 600;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     pointer-events: none;
     transform-origin: center;
 
+    /* The visible class is applied once the tool-tip element as been appended to the body & positioned correctly */
     &.visible {
-        animation: tooltipPop 1725ms 150ms linear forwards;
+        animation: limitedTooltip 1725ms 150ms linear forwards;
     }
 }
-@keyframes tooltipPop {
+@keyframes limitedTooltip {
     0% {
         opacity: 1;
     }
