@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "./",
+        "target": "ES2019",
+        "module": "ESNext",
+        "lib": ["dom", "esnext"],
+        "moduleResolution": "Node",
+        "skipLibCheck": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}

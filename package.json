@@ -1,0 +1,15 @@
+{
+    "name": "tooltipper",
+    "version": "0.1.0",
+    "description": "A lightweight JavaScript library for implementing tooltips.",
+    "author": "Kyle Andrews <codingwithkyle@gmail.com>",
+    "license": "GPL-3",
+    "main": "Tooltipper.js",
+    "devDependencies": {
+        "typescript": "^3.9.5"
+    },
+    "scripts": {
+        "compile": "tsc",
+        "build": "npm run compile"
+    }
+}
