@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const tooltipperFile = path.join(__dirname, "Tooltipper.js");
-const tooltipperMinFile = path.join(__dirname, "Tooltipper.min.js");
+const tooltipperFile = path.join(__dirname, "tooltipper.js");
+const tooltipperMinFile = path.join(__dirname, "tooltipper.min.js");
 
 if (fs.existsSync(tooltipperFile)) {
     fs.unlinkSync(tooltipperFile);

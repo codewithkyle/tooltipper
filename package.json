@@ -4,10 +4,10 @@
     "description": "A lightweight JavaScript library for implementing tooltips.",
     "author": "Kyle Andrews <codingwithkyle@gmail.com>",
     "license": "GPL-3",
-    "main": "Tooltipper.js",
+    "main": "tooltipper.js",
     "files": [
-        "Tooltipper.js",
-        "Tooltipper.min.js"
+        "tooltipper.js",
+        "tooltipper.min.js"
     ],
     "devDependencies": {
         "terser": "^4.8.0",
@@ -15,6 +15,6 @@
     },
     "scripts": {
         "cleanup": "node ./cleanup.js",
-        "build": "npm run cleanup && tsc && terser ./Tooltipper.js --compress --mangle --module --output ./Tooltipper.min.js"
+        "build": "npm run cleanup && tsc && terser ./tooltipper.js --compress --mangle --module --output ./tooltipper.min.js"
     }
 }
