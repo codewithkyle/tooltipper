@@ -1,6 +1,6 @@
 # Tooltipper
 
-A lightweight JavaScript library for implementing tooltips.
+A lightweight (1.2kb) JavaScript library for implementing tooltips.
 
 ## NPM Installation
 
@@ -44,6 +44,8 @@ refresh();
 ```
 
 ## Example CSS
+
+[Click here](https://codewithkyle.github.io/tooltipper/) to view the example.
 
 ```scss
 tool-tip {
