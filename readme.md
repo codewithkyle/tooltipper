@@ -2,9 +2,7 @@
 
 A lightweight JavaScript library for implementing tooltips.
 
-## Installation
-
-### NPM
+## NPM Installation
 
 Install via NPM:
 
@@ -22,7 +20,7 @@ Unpack the ES Module via [Snowpack](https://www.snowpack.dev/):
 }
 ```
 
-### CDN
+## CDN
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.0/tooltipper.min.js">
