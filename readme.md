@@ -44,3 +44,41 @@ Hotreload Tooltips:
 import { refresh } from "tooltipper";
 refresh();
 ```
+
+## Example CSS
+
+```scss
+tool-tip {
+    background-color: #424242;
+    color: #fff;
+    border-radius: 0.125rem;
+    line-height: 24px;
+    height: 24px;
+    white-space: nowrap;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    transform-origin: center;
+
+    &.visible {
+        animation: tooltipPop 1725ms 150ms linear forwards;
+    }
+}
+@keyframes tooltipPop {
+    0% {
+        opacity: 1;
+    }
+    4% {
+        opacity: 1;
+    }
+    96% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        animation-timing-function: ease-in-out;
+    }
+}
+```
