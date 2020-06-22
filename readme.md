@@ -28,10 +28,18 @@ Unpack the ES Module via [Snowpack](https://www.snowpack.dev/):
 
 ## Usage
 
+Create tooltips by adding the `tooltip` attribute to an element with an `aria-label` attribute:
+
+```html
+<a href="#" aria-label="Edit file" tooltip>
+    <svg />
+</a>
+```
+
 Create tooltips using the `tooltip` attribute:
 
 ```html
-<a href="#" aria-label="Edit file" tooltip="Edit file">
+<a href="#" tooltip="Edit file">
     <svg />
 </a>
 ```

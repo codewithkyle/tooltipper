@@ -10,7 +10,14 @@ class Tooltipper {
 
     private showTooltip: EventListener = (e: Event) => {
         const el = e.currentTarget as HTMLElement;
-        const text = el.getAttribute("tooltip");
+        let text = el.getAttribute("tooltip");
+        if (!text.length) {
+            text = el.getAttribute("aria-label");
+        }
+        if (!text.length) {
+            console.warn(`Tooltip could not be created -- missing aria-label or tooltip attribute values.`);
+            return;
+        }
         const tooltip = document.createElement("tool-tip");
         tooltip.setAttribute("uid", el.dataset.tooltipUid);
         tooltip.innerHTML = text;
