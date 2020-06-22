@@ -18,6 +18,10 @@ class Tooltipper {
             console.warn(`Tooltip could not be created -- missing aria-label or tooltip attribute values.`);
             return;
         }
+        const existingToolitp = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
+        if (existingToolitp) {
+            existingToolitp.remove();
+        }
         const tooltip = document.createElement("tool-tip");
         tooltip.setAttribute("uid", el.dataset.tooltipUid);
         tooltip.innerHTML = text;
