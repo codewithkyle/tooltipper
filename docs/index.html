@@ -27,8 +27,10 @@
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 0 4px 6px -1px rgba(74, 113, 231, 0.15), 0 2px 4px -1px rgba(74, 113, 231, 0.1);
                 border: 1px solid rgb(74, 113, 231);
+            }
+            a:focus {
+                box-shadow: 0 0 0 5px rgb(180, 199, 255);
             }
 
             a svg {
@@ -72,7 +74,7 @@
             }
         </style>
 
-        <script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.1/tooltipper.min.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.2/tooltipper.min.js"></script>
     </head>
     <body>
         <a href="#" aria-label="posion flask" tooltip="Tooltipper prevents overflow right" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);">

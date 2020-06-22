@@ -21,6 +21,7 @@ class Tooltipper {
         const tooltip = document.createElement("tool-tip");
         tooltip.setAttribute("uid", el.dataset.tooltipUid);
         tooltip.innerHTML = text;
+        tooltip.setAttribute("role", "tooltip");
         const elBounds = el.getBoundingClientRect();
         tooltip.style.position = "absolute";
         tooltip.style.zIndex = "999999";
@@ -62,7 +63,10 @@ class Tooltipper {
             }
             if (!survived) {
                 this.elements[k].removeEventListener("mouseenter", this.showTooltip);
+                this.elements[k].removeEventListener("focus", this.showTooltip);
+
                 this.elements[k].removeEventListener("mouseleave", this.hideTooltip);
+                this.elements[k].removeEventListener("blur", this.hideTooltip);
                 this.elements.splice(k, 1);
             }
         }
@@ -75,7 +79,10 @@ class Tooltipper {
                 newElements[i].dataset.tooltipUid = `${this.nextUid}`;
                 this.nextUid++;
                 newElements[i].addEventListener("mouseenter", this.showTooltip);
+                newElements[i].addEventListener("focus", this.showTooltip);
+
                 newElements[i].addEventListener("mouseleave", this.hideTooltip);
+                newElements[i].addEventListener("blur", this.hideTooltip);
             }
         }
         this.elements = [...this.elements, ...newElements];

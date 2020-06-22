@@ -23,7 +23,7 @@ Unpack the ES Module via [Snowpack](https://www.snowpack.dev/):
 ## CDN
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.1/tooltipper.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.2/tooltipper.min.js"></script>
 ```
 
 ## Usage
