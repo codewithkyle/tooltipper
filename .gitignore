@@ -1,4 +1,5 @@
 node_modules
-Tooltipper.js
-Tooltipper.min.js
+tooltipper.js
+tooltipper.min.mjs
+tooltipper.min.js
 .DS_Store

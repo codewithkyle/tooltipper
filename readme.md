@@ -2,7 +2,7 @@
 
 A lightweight (1.2kb) JavaScript library for implementing tooltips.
 
-## NPM Installation
+## Installation
 
 Install via NPM:
 
@@ -10,31 +10,14 @@ Install via NPM:
 npm i -S tooltipper
 ```
 
-Unpack the ES Module via [Snowpack](https://www.snowpack.dev/):
-
-```json
-"snowpack": {
-	"webDependencies": [
-		"tooltipper"
-	]
-}
-```
-
-## CDN
+Install via CDN:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.3/tooltipper.min.js"></script>
+<script type="module" src="https://unpkg.com/tooltipper@1/tooltipper.min.mjs"></script>
+<script defer src="https://unpkg.com/tooltipper@1/tooltipper.min.js"></script>
 ```
 
 ## Usage
-
-Create tooltips by adding the `tooltip` attribute to an element with an `aria-label` attribute:
-
-```html
-<a href="#" aria-label="Edit file" tooltip>
-    <svg />
-</a>
-```
 
 Create tooltips using the `tooltip` attribute:
 
@@ -44,14 +27,15 @@ Create tooltips using the `tooltip` attribute:
 </a>
 ```
 
-Hotreload Tooltips:
+Create tooltips by adding the `tooltip` attribute to an element with an `aria-label` attribute:
 
-```javascript
-import { refresh } from "tooltipper";
-refresh();
+```html
+<a href="#" aria-label="Edit file" tooltip>
+    <svg />
+</a>
 ```
 
-## Example CSS
+## Example SCSS
 
 [Click here](https://codewithkyle.github.io/tooltipper/) to view the example.
 

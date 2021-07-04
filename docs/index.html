@@ -53,11 +53,9 @@
                 pointer-events: none;
                 transform-origin: center;
             }
-
             tool-tip.visible {
                 animation: limitedTooltip 1725ms 150ms linear forwards;
             }
-
             @keyframes limitedTooltip {
                 0% {
                     opacity: 1;
@@ -75,7 +73,8 @@
             }
         </style>
 
-        <script type="module" src="https://cdn.jsdelivr.net/npm/tooltipper@0.1.3/tooltipper.min.js"></script>
+        <script type="module" src="https://unpkg.com/tooltipper@1/tooltipper.min.js"></script>
+        <!-- <script defer src="tooltipper.min.js"></script> -->
     </head>
     <body>
         <a href="#" aria-label="posion flask" tooltip="Tooltipper prevents overflow right" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);">
