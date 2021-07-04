@@ -1,6 +1,6 @@
 # Tooltipper
 
-A lightweight (1.2kb) JavaScript library for implementing tooltips.
+A lightweight (750 byte) JavaScript library for implementing tooltips.
 
 ## Installation
 
