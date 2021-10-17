@@ -44,9 +44,12 @@ class Tooltipper {
         } else if (tooltipLeft < 4) {
             tooltipLeft = 4;
         }
-        let tooltipTop = elBounds.top + elBounds.height;
+        let tooltipTop = elBounds.top + elBounds.height - window.scrollY;
         if (tooltipTop + tipBounds.height > window.innerHeight - 4) {
             tooltipTop = elBounds.top - tipBounds.height;
+        }
+        else if (tooltipTop + tipBounds.height > window.scrollY){
+            tooltipTop = elBounds.top + elBounds.height + window.scrollY;
         }
         tooltip.style.top = `${tooltipTop}px`;
         tooltip.style.left = `${tooltipLeft}px`;
