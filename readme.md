@@ -35,6 +35,8 @@ Create tooltips by adding the `tooltip` attribute to an element with an `aria-la
 </a>
 ```
 
+> **Please note** that tooltipper is an unopinionated library. All we aim to do is create, track, and remove custom `<tool-tip>` elements within the DOM. You are responsible for providing the CSS.
+
 ## Example SCSS
 
 [Click here](https://codewithkyle.github.io/tooltipper/) to view the example.
