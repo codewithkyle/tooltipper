@@ -1,14 +1,16 @@
 class Tooltipper {
     constructor() {
-        document.documentElement.addEventListener("mouseenter", this.showTooltip, { capture: true, passive: true});
-        document.documentElement.addEventListener("focus", this.showTooltip, { capture: true, passive: true});
-        document.documentElement.addEventListener("mouseleave", this.hideTooltip, { capture: true, passive: true});
-        document.documentElement.addEventListener("blur", this.hideTooltip, { capture: true, passive: true});
+        document.addEventListener("mouseenter", this.showTooltip, { capture: true, passive: true });
+        document.addEventListener("touchstart", this.showTooltip, { capture: true, passive: true });
+        document.addEventListener("focus", this.showTooltip, { capture: true, passive: true });
+        document.addEventListener("mouseleave", this.hideTooltip, { capture: true, passive: true });
+        document.addEventListener("touchend", this.hideTooltip, { capture: true, passive: true });
+        document.addEventListener("blur", this.hideTooltip, { capture: true, passive: true });
     }
 
     private showTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (el.getAttribute("tooltip") === null){
+        if (el.getAttribute("tooltip") === null) {
             return;
         }
         let text = el.getAttribute("tooltip");
@@ -22,10 +24,10 @@ class Tooltipper {
             console.warn(`Tooltip could not be created -- missing aria-label, tooltip, or title attribute.`);
             return;
         }
-        if (!el.dataset.tooltipUid){
+        if (!el.dataset.tooltipUid) {
             el.dataset.tooltipUid = uuid();
         }
-        let tooltip:HTMLElement = document.body.querySelector(`tool-tip`) || document.createElement("tool-tip");
+        let tooltip: HTMLElement = document.body.querySelector(`tool-tip`) || document.createElement("tool-tip");
         tooltip.setAttribute("uid", el.dataset.tooltipUid);
         tooltip.innerHTML = text;
         tooltip.setAttribute("role", "tooltip");
@@ -33,7 +35,7 @@ class Tooltipper {
         tooltip.style.position = "absolute";
         tooltip.style.zIndex = "999999";
         tooltip.style.opacity = "0";
-        if (!tooltip.isConnected){
+        if (!tooltip.isConnected) {
             document.body.appendChild(tooltip);
         }
         const tipBounds = tooltip.getBoundingClientRect();
@@ -47,8 +49,7 @@ class Tooltipper {
         let tooltipTop = elBounds.top + elBounds.height - window.scrollY;
         if (tooltipTop + tipBounds.height > window.innerHeight - 4) {
             tooltipTop = elBounds.top - tipBounds.height;
-        }
-        else if (tooltipTop + tipBounds.height > window.scrollY){
+        } else if (tooltipTop + tipBounds.height > window.scrollY) {
             tooltipTop = elBounds.top + elBounds.height + window.scrollY;
         }
         tooltip.style.top = `${tooltipTop}px`;
@@ -59,16 +60,16 @@ class Tooltipper {
 
     private hideTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (el.getAttribute("tooltip") === null || !el.dataset.tooltipUid){
+        if (el.getAttribute("tooltip") === null || !el.dataset.tooltipUid) {
             return;
         }
         const tooltip = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
-        if (tooltip){
+        if (tooltip) {
             tooltip?.remove();
         }
     };
 }
-function uuid(){
+function uuid() {
     // @ts-ignore
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
 }
