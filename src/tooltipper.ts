@@ -6,11 +6,33 @@ class Tooltipper {
         document.addEventListener("mouseleave", this.hideTooltip, { capture: true, passive: true });
         document.addEventListener("touchend", this.hideTooltip, { capture: true, passive: true });
         document.addEventListener("blur", this.hideTooltip, { capture: true, passive: true });
+        document.addEventListener("click", this.clickTooltip, { capture: true, passive: true });
+        document.addEventListener("keypress", this.clickTooltip, { capture: true, passive: true });
     }
+
+    private clickTooltip: EventListener = (e: Event) => {
+        // @ts-ignore
+        const el = e.target?.closest("[tooltip]");
+        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null) {
+            return;
+        }
+        if (e instanceof KeyboardEvent) {
+            if (e.key !== " ") {
+                return;
+            }
+        }
+        if (!el.dataset.tooltipUid) {
+            el.dataset.tooltipUid = uuid();
+        }
+        const tooltip = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
+        if (tooltip) {
+            tooltip?.remove();
+        }
+    };
 
     private showTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (el.getAttribute("tooltip") === null) {
+        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null) {
             return;
         }
         let text = el.getAttribute("tooltip");
@@ -60,7 +82,7 @@ class Tooltipper {
 
     private hideTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (el.getAttribute("tooltip") === null || !el.dataset.tooltipUid) {
+        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null || !el?.dataset?.tooltipUid) {
             return;
         }
         const tooltip = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
