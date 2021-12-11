@@ -3,18 +3,37 @@ class Tooltipper {
     private trackedElements: {
         [uid: string]: any;
     };
+    private deviceType: number;
 
     constructor() {
         this.trackedElements = {};
+        this.deviceType = 1; // 1 = pointer, 2 = touch
 
+        // Standard events
         document.addEventListener("mouseenter", this.showTooltip, { capture: true, passive: true });
-        document.addEventListener("touchstart", this.showTooltip, { capture: true, passive: true });
         document.addEventListener("focus", this.showTooltip, { capture: true, passive: true });
         document.addEventListener("mouseleave", this.hideTooltip, { capture: true, passive: true });
-        document.addEventListener("touchend", this.hideTooltip, { capture: true, passive: true });
         document.addEventListener("blur", this.hideTooltip, { capture: true, passive: true });
+
+        // Premature exits
         document.addEventListener("click", this.clickTooltip, { capture: true, passive: true });
         document.addEventListener("keypress", this.clickTooltip, { capture: true, passive: true });
+
+        // Manage device types
+        document.addEventListener(
+            "touchstart",
+            () => {
+                this.deviceType = 2;
+            },
+            { capture: true, passive: true }
+        );
+        document.addEventListener(
+            "mousemove",
+            () => {
+                this.deviceType = 1;
+            },
+            { capture: true, passive: true }
+        );
 
         this.observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
@@ -87,7 +106,7 @@ class Tooltipper {
 
     private showTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null) {
+        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null || e instanceof TouchEvent || (e instanceof FocusEvent && this.deviceType !== 1)) {
             return;
         }
         let text = el.getAttribute("tooltip");
