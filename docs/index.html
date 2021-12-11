@@ -73,8 +73,8 @@
             }
         </style>
 
-        <!-- <script type="module" src="https://unpkg.com/tooltipper@1/tooltipper.min.js"></script> -->
-        <script type="module" src="tooltipper.js"></script>
+        <script type="module" src="https://unpkg.com/tooltipper@1/tooltipper.min.mjs"></script>
+        <!-- <script type="module" src="tooltipper.js"></script> -->
     </head>
     <body>
         <a href="#" aria-label="posion flask" tooltip="Tooltipper prevents overflow right" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%)">
@@ -101,7 +101,7 @@
                 ></path>
             </svg>
         </a>
-        <a href="#" aria-label="Rocket ship" tooltip style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)">
+        <a href="#" id="rocket" tooltip style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)">
             <svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
                     fill="currentColor"
@@ -109,5 +109,12 @@
                 ></path>
             </svg>
         </a>
+
+        <script>
+            const rocket = document.body.querySelector("#rocket");
+            setInterval(() => {
+                rocket.setAttribute("tooltip", Math.random().toString());
+            }, 150);
+        </script>
     </body>
 </html>
