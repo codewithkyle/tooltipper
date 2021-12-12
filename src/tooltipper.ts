@@ -60,12 +60,6 @@ class Tooltipper {
 
     private placeTooltip(el: HTMLElement, tooltip: HTMLElement) {
         const elBounds = el.getBoundingClientRect();
-        tooltip.style.position = "absolute";
-        tooltip.style.zIndex = "999999";
-        tooltip.style.opacity = "0";
-        if (!tooltip.isConnected) {
-            document.body.appendChild(tooltip);
-        }
         const tipBounds = tooltip.getBoundingClientRect();
         let tooltipLeft = elBounds.left + elBounds.width / 2 - tipBounds.width / 2;
         if (tooltipLeft + tipBounds.width > window.innerWidth - 4) {
@@ -127,6 +121,12 @@ class Tooltipper {
         tooltip.setAttribute("uid", el.dataset.tooltipUid);
         tooltip.innerHTML = text;
         tooltip.setAttribute("role", "tooltip");
+        tooltip.style.position = "absolute";
+        tooltip.style.zIndex = "999999";
+        tooltip.style.opacity = "0";
+        if (!tooltip.isConnected) {
+            document.body.appendChild(tooltip);
+        }
         this.placeTooltip(el, tooltip);
         tooltip.classList.add("visible");
         tooltip.style.opacity = "1";
