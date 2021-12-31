@@ -53,24 +53,6 @@
                 pointer-events: none;
                 transform-origin: center;
             }
-            tool-tip.visible {
-                animation: limitedTooltip 1725ms 150ms linear forwards;
-            }
-            @keyframes limitedTooltip {
-                0% {
-                    opacity: 1;
-                }
-                4% {
-                    opacity: 1;
-                }
-                96% {
-                    opacity: 1;
-                }
-                100% {
-                    opacity: 0;
-                    animation-timing-function: ease-in-out;
-                }
-            }
         </style>
 
         <script type="module" src="https://unpkg.com/tooltipper@1/tooltipper.min.mjs"></script>
@@ -115,6 +97,9 @@
             setInterval(() => {
                 rocket.setAttribute("tooltip", Math.random().toString());
             }, 150);
+            setTimeout(() => {
+                rocket.remove();
+            }, 5000);
         </script>
     </body>
 </html>

@@ -1,5 +1,4 @@
 class Tooltipper {
-    private observer: MutationObserver;
     private trackedElements: {
         [uid: string]: any;
     };
@@ -34,28 +33,31 @@ class Tooltipper {
             },
             { capture: true, passive: true }
         );
+        this.tick();
+    }
 
-        this.observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === "attributes") {
-                    if (mutation.attributeName === "tooltip" || mutation.attributeName === "aria-label") {
-                        const el = mutation.target as HTMLElement;
-                        let text = el.getAttribute("tooltip");
-                        if (!text.length) {
-                            text = el.getAttribute("aria-label");
-                        }
-                        if (!text.length) {
-                            text = el.getAttribute("title");
-                        }
-                        const tooltip: HTMLElement = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
-                        if (tooltip) {
-                            tooltip.innerHTML = text;
-                            this.placeTooltip(el, tooltip);
-                        }
-                    }
+    private tick() {
+        for (const uid in this.trackedElements) {
+            const el = document.body.querySelector(`[data-tooltip-uid="${uid}"]`) as HTMLElement;
+            const tooltip = document.body.querySelector(`tool-tip[uid="${uid}"]`) as HTMLElement;
+            if (el == null) {
+                delete this.trackedElements[uid];
+                if (tooltip) {
+                    tooltip.remove();
                 }
-            });
-        });
+            } else {
+                let text = el.getAttribute("tooltip");
+                if (!text.length) {
+                    text = el.getAttribute("aria-label");
+                }
+                if (!text.length) {
+                    text = el.getAttribute("title");
+                }
+                tooltip.innerHTML = text;
+                this.placeTooltip(el, tooltip);
+            }
+        }
+        window.requestAnimationFrame(this.tick.bind(this));
     }
 
     private placeTooltip(el: HTMLElement, tooltip: HTMLElement) {
@@ -132,9 +134,6 @@ class Tooltipper {
         tooltip.style.opacity = "1";
 
         if (!(el.dataset.tooltipUid in this.trackedElements)) {
-            this.observer.observe(el, {
-                attributes: true,
-            });
             this.trackedElements[el.dataset.tooltipUid] = null;
         }
     };
