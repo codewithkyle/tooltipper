@@ -1,6 +1,6 @@
 {
     "name": "tooltipper",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "A lightweight JavaScript library for implementing tooltips.",
     "author": "Kyle Andrews <codingwithkyle@gmail.com>",
     "license": "MIT",
