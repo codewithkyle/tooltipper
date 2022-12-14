@@ -36,16 +36,16 @@ class Tooltipper {
         this.tick();
     }
 
-    private tick() {
+    private tick(): void {
         for (const uid in this.trackedElements) {
             const el = document.body.querySelector(`[data-tooltip-uid="${uid}"]`) as HTMLElement;
             const tooltip = document.body.querySelector(`tool-tip[uid="${uid}"]`) as HTMLElement;
             if (el == null) {
                 delete this.trackedElements[uid];
-                if (tooltip) {
+                if (tooltip && tooltip.isConnected) {
                     tooltip.remove();
                 }
-            } else {
+            } else if (tooltip != null) {
                 let text = el.getAttribute("tooltip");
                 if (!text.length) {
                     text = el.getAttribute("aria-label");
@@ -60,7 +60,7 @@ class Tooltipper {
         window.requestAnimationFrame(this.tick.bind(this));
     }
 
-    private placeTooltip(el: HTMLElement, tooltip: HTMLElement) {
+    private placeTooltip(el: HTMLElement, tooltip: HTMLElement): void {
         const elBounds = el.getBoundingClientRect();
         const tipBounds = tooltip.getBoundingClientRect();
         let tooltipLeft = elBounds.left + elBounds.width / 2 - tipBounds.width / 2;
@@ -102,7 +102,7 @@ class Tooltipper {
 
     private showTooltip: EventListener = (e: Event) => {
         const el = e.target as HTMLElement;
-        if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null || (typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) || (e instanceof FocusEvent && this.deviceType !== 1)) {
+        if (!(el instanceof HTMLElement) || el.getAttribute("tooltip") === null || (typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) || (e instanceof FocusEvent && this.deviceType !== 1)) {
             return;
         }
         let text = el.getAttribute("tooltip");
@@ -143,9 +143,9 @@ class Tooltipper {
         if (!(el instanceof HTMLElement) || el?.getAttribute("tooltip") === null || !el?.dataset?.tooltipUid) {
             return;
         }
-        const tooltip = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`);
-        if (tooltip) {
-            tooltip?.remove();
+        const tooltip = document.body.querySelector(`tool-tip[uid="${el.dataset.tooltipUid}"]`) as HTMLElement;
+        if (tooltip && tooltip.isConnected) {
+            tooltip.remove();
         }
     };
 }
