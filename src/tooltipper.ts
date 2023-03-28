@@ -33,7 +33,18 @@ class Tooltipper {
             },
             { capture: true, passive: true }
         );
+        window.addEventListener("scroll", this.clearTooltips, { capture: true, passive: true });
+        window.addEventListener("resize", this.clearTooltips, { capture: true, passive: true });
         this.tick();
+    }
+
+    private clearTooltips:EventListener = () => {
+        for (const uid in this.trackedElements) {
+            const tooltip = document.body.querySelector(`tool-tip[uid="${uid}"]`) as HTMLElement;
+            if (tooltip && tooltip.isConnected) {
+                tooltip.remove();
+            }
+        }
     }
 
     private tick(): void {
@@ -46,15 +57,17 @@ class Tooltipper {
                     tooltip.remove();
                 }
             } else if (tooltip != null) {
-                let text = el.getAttribute("tooltip");
+                let text = el.getAttribute("tooltip") || "";
                 if (!text.length) {
-                    text = el.getAttribute("aria-label");
+                    text = el.getAttribute("aria-label") || "";
                 }
                 if (!text.length) {
-                    text = el.getAttribute("title");
+                    text = el.getAttribute("title") || "";
                 }
-                tooltip.innerHTML = text;
-                this.placeTooltip(el, tooltip);
+                if (text !== tooltip.innerHTML) {
+                    tooltip.innerHTML = text;
+                    this.placeTooltip(el, tooltip);
+                }
             }
         }
         window.requestAnimationFrame(this.tick.bind(this));

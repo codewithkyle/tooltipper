@@ -20,6 +20,6 @@
         "build:pkg": "esbuild ./src/tooltipper.ts --outfile=tooltipper.js --format=esm",
         "build:esm": "esbuild ./src/tooltipper.ts --outfile=tooltipper.min.mjs --format=esm --minify",
         "build:cjs": "esbuild ./src/tooltipper.ts --outfile=tooltipper.min.js --format=iife --minify",
-        "test": "serve ./docs"
+        "test": "npm run build && cp ./tooltipper.min.mjs ./docs/tooltipper.js && serve ./docs"
     }
 }
